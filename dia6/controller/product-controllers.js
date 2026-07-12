@@ -18,12 +18,11 @@ function getProductById(req, res) {
 }
 
 
-// Figure out a better way to return
 function addProduct(req, res) {
     const { name, price, quantity_left } = req.body;
     const newProduct = new Product({ name, price, quantity_left });
     newProduct.save()
-        .then(product => res.send(201).json(product))
+        .then(product => res.status(201).json(product))
         .catch(err => res.status(400).json({ message: err.message }))
 }
 
@@ -38,7 +37,7 @@ function updateProduct(req, res) {
             if (!updateProduct) {
                 return res.status(404).json({ message: "Product not found"})
             }
-            res.json(updatedProduct);
+            res.status(200).json(updateProduct);
         })
         .catch(err => res.status(400).json({ message: err.message }))
 }
