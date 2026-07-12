@@ -1,6 +1,6 @@
 require('dotenv').config()
 const express = require('express')
-// require router
+const productRouter = require('./routes/productRouter.js')
 
 // connect to database and require config db.js file
 const connectDB = require('./config/db.js')
@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
     res.send('Hello World')
 })
 
-// connect to router
+app.use('/products', productRouter)
 
 app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`)
