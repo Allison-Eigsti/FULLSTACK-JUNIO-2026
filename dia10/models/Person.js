@@ -71,7 +71,7 @@ function updatePerson(dataToUpdate) {
     return people[personIndex]
 }
 
-const deletePerson = (req, res) => {
+const deletePerson = (id) => {
     const people = parseCSV('person')
 
     const filteredPeople = people.filter(
@@ -79,6 +79,8 @@ const deletePerson = (req, res) => {
     )
 
     writeCSV('person', filteredPeople)
+
+    return filteredPeople
 }
 
 

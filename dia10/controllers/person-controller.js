@@ -45,13 +45,15 @@ const updatePerson = (req, res) => {
     }
 }
 
-const deletePerson = (req, res) => personModel.deletePerson({
+const deletePerson = (req, res) => {
     try {
-        const deletedPerson = personModel.deletePerson(req.params.id)
+        const updatedPeople = personModel.deletePerson(req.params.id)
 
-        res.statis
+        res.status(200).json(updatedPeople)
+    } catch (err) {
+        res.status(500).json({ error: err.message })
     }
-})
+}
 
 
 
@@ -60,5 +62,5 @@ module.exports = {
     getAllPeople,
     getPersonById,
     updatePerson,
-    
+    deletePerson
 }

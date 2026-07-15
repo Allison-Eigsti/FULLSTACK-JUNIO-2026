@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Mathematics",
+    "teacherId": 4,
+    "students": [1, 2, 3]
+  },
+  {
+    "id": 2,
+    "name": "Science",
+    "teacherId": 7,
+    "students": [5, 6, 8]
+  },
+  {
+    "id": 3,
+    "name": "History",
+    "teacherId": 11,
+    "students": [9, 10, 12]
+  },
+  {
+    "id": 4,
+    "name": "English",
+    "teacherId": 15,
+    "students": [13, 14, 16]
+  },
+  {
+    "id": 5,
+    "name": "Computer Science",
+    "teacherId": 17,
+    "students": [18]
+  }
+]
