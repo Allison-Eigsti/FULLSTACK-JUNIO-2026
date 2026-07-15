@@ -72,3 +72,6 @@ module.exports = {
     updateClass,
     deleteClass
 }
+
+// TO DO
+// test the first 3 routes, finish the controllers and the routes and connect class router to index
