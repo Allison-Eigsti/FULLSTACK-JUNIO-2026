@@ -1,32 +1,10 @@
-[
-  {
-    "id": 1,
-    "name": "Mathematics",
-    "teacherId": 4,
-    "students": [1, 2, 3]
-  },
-  {
-    "id": 2,
-    "name": "Science",
-    "teacherId": 7,
-    "students": [5, 6, 8]
-  },
-  {
-    "id": 3,
-    "name": "History",
-    "teacherId": 11,
-    "students": [9, 10, 12]
-  },
-  {
-    "id": 4,
-    "name": "English",
-    "teacherId": 15,
-    "students": [13, 14, 16]
-  },
-  {
-    "id": 5,
-    "name": "Computer Science",
-    "teacherId": 17,
-    "students": [18]
-  }
-]
+id,name,teacherId,students
+1,Mathematics,4,"1;2;3"
+2,Science,7,"5;6;8"
+3,History,11,"9;10;12"
+5,Computer Science,17,"18"
+02f1fa95-3cfd-4192-9def-a755bf96346a,Physics,15,"1;2;3"
+65d422c4-5dda-4069-ba60-6ee1f7e120ce,Advanced Mathematics,15,"1;2"
+7b3e1d5a-9c42-4a8f-9d32-5e8a0b7c6f11,Chemistry,17,"5;6;8"
+8c4f2a91-6d73-4b20-ae55-1f9c3d7b8240,Biology,11,"9;10;12"
+9d7a5e62-1f84-4c39-bb61-8a2e4f9d3056,Programming,17,"18;19;20"

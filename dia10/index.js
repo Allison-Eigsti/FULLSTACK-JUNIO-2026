@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const { parseCSV, writeCSV } = require('./csv')
 const personRouter = require('./routes/personRouter.js')
+const classroomRouter = require('./routes/classroomRouter.js')
 
 const port = process.env.PORT || 3000
 
@@ -9,6 +10,7 @@ app.use(express.json())
 
 
 app.use('/person', personRouter)
+app.use('/classroom', classroomRouter)
 
 app.listen(port, () => {
     console.log(`Servidor iniciado en el puerto ${port}`)
