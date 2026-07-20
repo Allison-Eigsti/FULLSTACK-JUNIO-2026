@@ -1,0 +1,6 @@
+{
+  "database": {
+    "uri": "mongodb://localhost:27017/dia13_development"
+  },
+  "port": 3000
+}
