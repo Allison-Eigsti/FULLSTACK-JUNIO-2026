@@ -65,9 +65,50 @@ function handleChangeStatus(taskId, newStatus) {
 
   return (
     <>
+    <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <h1 class="text-3xl font-bold underline">
-        Hello world!
+        Tasks
       </h1>
+      <section className='flex flex-col items-center bg-gray-100'>
+        <h2 className='text-2xl font-bold mb-4'>List Task</h2>
+        <ul className='mt-4'>
+          {tasks.map(task => {
+            <li key={task._id} className='flex flex-col items-center bg-white mb-2'>
+                {task.name}
+                <p className='text-sm text-gray-500 mb-2'>{task.description}</p>
+                {
+                  task.status ?
+                  ( <span className='text-xs'>Completed</span>)
+                  :
+                  ( <span className='text-xs'>Pending</span>)
+                }
+                <button 
+                onClick={() => handleChangeStatus(task._id, !task.status)}
+                className='bg-green-500 text-white px-4 py-2 rounded mt-2'
+                >
+                  {task.status ? 'Mark as Pending' : 'Mark as Completed'}
+                </button>
+
+                <button
+                  onClick={() => handleDeleteTask(task._id)}
+                  className='bg-red-500 text-white px-4 py-2 rounded mt-2'
+                >
+                  Delete
+                </button>
+            </li>
+          })}
+        </ul>
+      </section>
+
+      <section className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        <h2 className='text-2xl font-bold mb-4'>Add Task</h2>
+          <form className='flex flex-col items-center' onSubmit={handleAddTask}>
+            <input type="text" placeholder='Task Name' className='mb-2 p-2 border rounded' />
+            <input type="text" placeholder='Task Description' className='mb-2 p-2 border rounded' />
+            <button type="submit" className='bg-blue-500 text-white px-4 py-2 rounded'>Add Task</button>
+          </form>
+      </section>
+    </main>
     </>
   )
 }
