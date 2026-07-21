@@ -4,7 +4,7 @@ function authorization(req, res, next) {
     console.log("Authorization:", authHeader); 
 
     if (authHeader != 'hello') {
-        return res.status(402).json({ message: 'User is forbidden from accessing this page'})
+        return res.status(401).json({ message: 'User is forbidden from accessing this page'})
     }
     next()
 }
