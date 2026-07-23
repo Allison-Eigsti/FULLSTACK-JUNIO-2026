@@ -5,6 +5,7 @@ const app = express()
 const port = process.env.PORT || 3000
 const db = require('./config/db')
 const taskRouter = require('./routes/taskRouter.js')
+const userRouter = require('./routes/userRouter.js')
 const cors = require('cors')
 const logger = require('./middlewares/logs')
 const serverError = require('./middlewares/server-error')
@@ -23,6 +24,7 @@ app.use(authorization)
 
 
 app.use('/tasks', taskRouter)
+app.use('/user', userRouter)
 
 
 app.use(serverError)
