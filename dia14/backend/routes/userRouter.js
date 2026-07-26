@@ -5,9 +5,9 @@ const { registerUser, loginUser, getUser } = require('../controllers/user-contro
 const authorization = require('../middlewares/authorization')
 
 
-router.post('/register, registerUser')
-router.post('/login, loginUser')
-router.get('/me, authorization, getUser')
+router.post('/register', registerUser)
+router.post('/login', loginUser)
+router.get('/me', authorization, getUser)
 
 
 module.exports = router

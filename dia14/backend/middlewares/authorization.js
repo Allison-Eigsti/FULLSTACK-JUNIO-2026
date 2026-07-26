@@ -1,12 +1,20 @@
+const jwt = require('jsonwebtoken')
+const User = require('../models/User')
+
 function authorization(req, res, next) {
     const authHeader = req.headers['authorization']
-
-    console.log("Authorization:", authHeader); 
-
-    if (authHeader != 'Bearer your_token_here') {
-        return res.status(401).json({ message: 'User is forbidden from accessing this page'})
+    if(!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ message: 'Authorization token required.' })
     }
-    next()
+
+    const token = authHeader.split(' ')[1] // Isolate the token string
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET)
+        req.user = decoded
+        next()
+    } catch(err) {
+        return res.status(401).json({ message: "Invalid authorization token" })
+    }
 }
 
 module.exports = authorization

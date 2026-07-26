@@ -11,24 +11,25 @@ const logger = require('./middlewares/logs')
 const serverError = require('./middlewares/server-error')
 const notFound = require('./middlewares/not-found')
 const authorization = require('./middlewares/authorization')
-const requestCounter = require('./middlewares/request-counter')
 
 db()
 
 // poner alli en el argumento the dominion name of your api so that its not for public use
 app.use(express.json())
 app.use(cors())
-app.use(requestCounter)
 app.use(logger)
-app.use(authorization)
 
-
-app.use('/tasks', taskRouter)
+// Unprotected Routes
 app.use('/user', userRouter)
 
+// Auth middleware
+app.use(authorization)
 
-app.use(serverError)
+// Protected Routes
+app.use('/tasks', taskRouter)
+
 app.use(notFound)
+app.use(serverError)
 
 app.listen(port, () => {
     console.log(`Servidor iniciado en el puerto ${port}`)
