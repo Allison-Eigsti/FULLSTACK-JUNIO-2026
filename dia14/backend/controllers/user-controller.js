@@ -13,9 +13,10 @@ async function registerUser(req, res) {
         const hash = bcrypt.hashSync(password, 10)
 
         const newUser = new User({ name, password: hash })
-        newUser.save()
+        await newUser.save()
 
-        res.status(201).json({ message: "User created successfully." })
+        const token = jwt.sign({ id: newUser._id, name: newUser.name }, process.env.JWT_SECRET)
+        res.status(201).json({ accessToken: token })
     } catch(err) {
         res.status(500).json({
             message: err.message
@@ -42,6 +43,7 @@ async function loginUser(req, res) {
         // authorize and serialize w jwt (Create jwt for session)
         // send jwt back to client browser
         const token = jwt.sign({ id: user._id, name: user.name }, process.env.JWT_SECRET)
+        console.log('user successfully logged in:', user.name)
         res.json({ accessToken: token })
 
     } catch(err) {

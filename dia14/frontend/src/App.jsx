@@ -1,115 +1,59 @@
 import { useEffect, useState } from 'react'
+import { Routes, Route, Link, useLocation } from 'react-router-dom'
+import Home from './pages/home'
+import Register from './components/register'
+import Login from './components/login'
+import Tasks from './pages/tasks'
+
 
 function App() {
-  const [ tasks, setTasks] = useState([])
+  const location = useLocation()
 
-  useEffect(() => {
-    fetch('http://localhost:3000/tasks', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer your_token_here'
-      }
-    })
-    .then(response => response.json())
-    .then(data => setTasks(data))
-    .catch(error => console.error('Error fetching tasks:', error)) 
-  }, []);
-
-  function handleAddTask(event) {
-    event.preventDefault();
-    const name = event.target[0].value;
-    const description = event.target[1].value;
-
-    fetch('http://localhost:3000/tasks', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer your_token_here'       
-      },
-      body: JSON.stringify({ name, description })
-    })
-    .then(response => response.json())
-    .then(newTask => setTasks(prevTasks => [...prevTasks, newTask]))
-    .catch(error => console.error('Error adding tasks:', error))
+  if (localStorage.getItem('token')) {
+    if (["/login", "/register"].includes(location.pathname)) {
+      window.location.href = '/'
+    }
+  } else {
+    if (["/tasks"].includes(location.pathname)) {
+      window.location.href='/login'
+    }
   }
 
-
-function handleDeleteTask(taskId) {
-  console.log(222)
-  fetch(`http://localhost:3000/tasks/${taskId}`, {
-    method: 'delete',
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer your_token_here'      
-    }
-  })
-  .then(()=> setTasks(prevTasks => prevTasks.filter(task => task._id !== taskId)))
-  .catch(error => console.error('Error deleting task:', error))
-}
-
-function handleChangeStatus(taskId, newStatus) {
-  fetch(`http://localhost:3000/tasks/${taskId}`, {
-    method: 'PUT',
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer your_token_here'        
-    },
-    body: JSON.stringify({ status: newStatus })
-  })
-  .then(response => response.json())
-  .then(updatedTask => {
-    setTasks(prevTasks => prevTasks.map(task => task._id === taskId ? updatedTask : task))
-  })
-  .catch(error => console.error('Error updating task status:', error))
-}
-
+  function handleLogout() {
+    localStorage.clear()
+    window.location.href = '/login'
+  }
+ 
   return (
     <>
-    <main className="flex flex-col items-center min-h-screen justify-center bg-gray-100">
-      <h1 className="text-3xl font-bold underline">
-        Tasks
-      </h1>
-      <section className='flex flex-col items-center bg-gray-100'>
-        <h2 className='text-2xl font-bold mb-4'>List Task</h2>
-        <ul className='mt-4'>
-          {tasks.map(task => (
-            <li key={task._id} className='flex flex-col items-center bg-white mb-2'>
-                {task.name}
-                <p className='text-sm text-gray-500 mb-2'>{task.description}</p>
-                {
-                  task.status ?
-                  ( <span className='text-xs'>Completed</span>)
-                  :
-                  ( <span className='text-xs'>Pending</span>)
-                }
-                <button 
-                onClick={() => handleChangeStatus(task._id, !task.status)}
-                className='bg-green-500 text-white px-4 py-2 rounded mt-2'
-                >
-                  {task.status ? 'Mark as Pending' : 'Mark as Completed'}
-                </button>
-
-                <button
-                  onClick={() => handleDeleteTask(task._id)}
-                  className='bg-red-500 text-white px-4 py-2 rounded mt-2'
-                >
-                  Delete
-                </button>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="flex flex-col items-center justify-center bg-gray-100">
-        <h2 className='text-2xl font-bold mb-4'>Add Task</h2>
-          <form className='flex flex-col items-center' onSubmit={handleAddTask}>
-            <input type="text" placeholder='Task Name' className='mb-2 p-2 border rounded' />
-            <input type="text" placeholder='Task Description' className='mb-2 p-2 border rounded' />
-            <button type="submit" className='bg-blue-500 text-white px-4 py-2 rounded'>Add Task</button>
-          </form>
-      </section>
-    </main>
+      {/* Barra de navegación usando <Link> para evitar que la página se recargue */}
+      <nav className="mb-6 flex flex-wrap items-center justify-left gap-4 bg-slate-900 px-5 py-4 text-slate-100 shadow-lg shadow-slate-400/10">
+        <Link className="rounded-full border border-slate-700 px-4 py-2 transition hover:bg-slate-700 hover:text-white" to="/">Home</Link>
+        {localStorage.getItem('token') && (
+          <Link className="rounded-full border border-slate-700 px-4 py-2 transition hover:bg-slate-700 hover:text-white" to="/tasks">Tasks</Link>
+        )}
+        {!localStorage.getItem('token') && (
+          <Link className="rounded-full border border-slate-700 px-4 py-2 transition hover:bg-slate-700 hover:text-white" to="/login">Login</Link>
+        )}
+        {!localStorage.getItem('token') && (
+          <Link className="rounded-full border border-slate-700 px-4 py-2 transition hover:bg-slate-700 hover:text-white" to="/register">Register</Link>
+        )}
+        {localStorage.getItem('token') && (
+          <button
+            onClick={handleLogout}
+            className="rounded-full border border-slate-700 px-4 py-2 transition hover:bg-slate-700 hover:text-white"
+          >
+            Logout
+          </button>
+        )}
+      </nav>
+      {/* Defining the routes */}
+      <Routes>
+        <Route path="/" element={<Home />}/>
+        <Route path="/login" element={<Login />}/>
+        <Route path="/register" element={<Register />}/>
+        <Route path="/tasks" element={<Tasks />}/>
+      </Routes>
     </>
   )
 }
