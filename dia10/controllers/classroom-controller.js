@@ -95,6 +95,7 @@ const getClassByIdAllInfo = (req, res) => {
 };
 
 
+
 module.exports = {
     getAllClasses,
     getClassById,
