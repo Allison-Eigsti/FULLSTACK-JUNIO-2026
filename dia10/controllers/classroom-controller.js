@@ -59,10 +59,47 @@ const deleteClass = (req, res) => {
     }
 }
 
+const getClassByIdAllInfo = (req, res) => {
+    try {
+        const singleClass = classModel.getClassById(req.params.id);
+
+        if (!singleClass) {
+            return res.status(404).json({ error: "Class not found" });
+        }
+
+        const people = personModel.getAllPeople();
+
+        // Find the teacher
+        const teacher = people.find(
+            person => person.id === singleClass.teacherId
+        );
+
+        // Find all students
+        const studentIds = singleClass.students.split(";");
+
+        const students = people.filter(person =>
+            studentIds.includes(person.id)
+        );
+
+        const classWithInfo = {
+            id: singleClass.id,
+            name: singleClass.name,
+            teacher,
+            students
+        };
+
+        res.status(200).json(classWithInfo);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+
 module.exports = {
     getAllClasses,
     getClassById,
     createClass,
     updateClass,
-    deleteClass
+    deleteClass,
+    getClassByIdAllInfo
 }
