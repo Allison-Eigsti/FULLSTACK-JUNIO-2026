@@ -15,6 +15,7 @@ router.delete('/:id', deleteClass)
 
 router.get('/class-detail/:id', getClassByIdAllInfo)
 
-router.get('/all-detail', getClassesWithInfo)
+router.get('/all-detail', getClassesWithInfo) 
+//
 
 module.exports = router

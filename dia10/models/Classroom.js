@@ -123,30 +123,6 @@ function deleteClass(id) {
     return filteredClasses
 }
 
-function getClassesWithInfo() {
-    const classes = parseCSV("classrooms");
-    const people = parseCSV("person");
-
-    return classes.map(singleClass => {
-        const teacher = people.find(
-            person => person.id === singleClass.teacherId
-        );
-
-        const studentIds = singleClass.students.split(";");
-
-        const students = people.filter(person =>
-            studentIds.includes(person.id)
-        );
-
-        return {
-            id: singleClass.id,
-            name: singleClass.name,
-            teacher,
-            students
-        };
-    });
-}
-
 
 
 module.exports = {
@@ -154,8 +130,7 @@ module.exports = {
     getClassById,
     createClass,
     updateClass,
-    deleteClass,
-    getAllClassesWithInfo
+    deleteClass
 }
 
 // TO DO
