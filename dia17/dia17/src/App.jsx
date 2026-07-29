@@ -11,7 +11,7 @@ function App() {
 
   function setResult() {
     let r = evaluate(screen)
-    setScreen(r)
+    setScreen(r.toFixed(6))
   }
 
   function clrAll() {
