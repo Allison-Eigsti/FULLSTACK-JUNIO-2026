@@ -14,8 +14,8 @@ function Fruits({ fruitList }) {
   
   return (
     <>
-    <div>
-        <h2>Fruits</h2>
+    <div className="w-full overflow-hidden rounded-lg border border-slate-200 bg-white shadow-lg shadow-slate-950/5 p-8 flex flex-col gap-4">
+        <h2 className="font-sans text-base font-bold md:text-lg lg:text-xl">Fruits</h2>
         <ul>
             {fruits.map((fruit) => (
                 <li>{fruit}</li>

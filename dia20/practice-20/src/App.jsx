@@ -6,7 +6,9 @@ function App() {
 
   return (
     <>
-      <Home />
+      <main className="flex flex-col items-center p-24 bg-gray-200 gap-8">
+          <Home />
+      </main>
     </>
   )
 }
