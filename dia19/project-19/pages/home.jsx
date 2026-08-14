@@ -3,6 +3,8 @@ import ListaFrutas from "../components/ListaFrutas"
 import ListaTareas from "../components/ListaTareas"
 import ArticulosDestacados from "../components/ArticulosDestacados"
 import NumerosPares from "../components/NumerosPares"
+import AlumnosAprobados from "../components/AlumnosAprobados"
+import ListaUsuarios from "../components/ListaUsuarios"
 
 const frutas = [
     'banana',
@@ -24,6 +26,17 @@ const articulos = [
     { id: 5, title: 'Title 5', content: 'Content content content', featured: true},
 ]
 
+const alumnos = [
+    { name: 'Allie', grade: '4'},
+    { name: 'Sara', grade: '6'},
+    { name: 'Megan', grade: '7'},
+]
+
+const usuarios = [
+    {id: 1, name: 'Jose'},
+    {id: 2, name: 'Jorge'},
+    {id: 3, name: 'Juan'}
+]
 
 
 function Home() {
@@ -43,6 +56,14 @@ function Home() {
 
             <section>
                 <NumerosPares />
+            </section>
+
+            <section>
+                <AlumnosAprobados alumnos={alumnos}/>
+            </section>
+
+            <section>
+                <ListaUsuarios usuarios={usuarios}/>
             </section>
         </>
     )
