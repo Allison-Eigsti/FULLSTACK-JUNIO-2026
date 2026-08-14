@@ -4,7 +4,17 @@ const classModel = require('../models/Classroom')
 
 const getAllClasses = (req, res) => {
     try {
-        const classes = classModel.getAllClasses()
+        const classes = classModel.getAllClasses(req.query)
+
+        res.status(200).json(classes)
+    } catch(err) {
+        res.status(500).json({ error: err.message })
+    }
+}
+
+const getAllClassesAllInfo = (req, res) => {
+    try{
+        const classes = classModel.getAllClassesAllInfo(req.query)
 
         res.status(200).json(classes)
     } catch(err) {
@@ -94,31 +104,6 @@ const getClassByIdAllInfo = (req, res) => {
     }
 };
 
-function getClassesWithInfo() {
-    const classes = parseCSV("classrooms");
-    const people = parseCSV("person");
-
-    return classes.map(singleClass => {
-        const teacher = people.find(
-            person => person.id === singleClass.teacherId
-        );
-
-        const studentIds = singleClass.students.split(";");
-
-        const students = people.filter(person =>
-            studentIds.includes(person.id)
-        );
-
-        return {
-            id: singleClass.id,
-            name: singleClass.name,
-            teacher,
-            students
-        };
-    });
-}
-
-
 
 module.exports = {
     getAllClasses,
@@ -127,5 +112,5 @@ module.exports = {
     updateClass,
     deleteClass,
     getClassByIdAllInfo,
-    getClassesWithInfo
+    getAllClassesAllInfo
 }

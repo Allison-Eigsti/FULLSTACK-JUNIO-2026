@@ -5,9 +5,21 @@ const { v4: uuidv4 } = require("uuid");
 
 
 // get all people
-function getAllPeople() {
+function getAllPeople(filters = {}) {
     const people = parseCSV('person')
-    return people
+
+    return people.filter(person => {
+
+        const matchesName =
+            !filters.name ||
+            person.name.toLowerCase().includes(filters.name.toLowerCase())
+
+        const matchesRole =
+            !filters.role ||
+            person.role.toLowerCase() === filters.role.toLowerCase()
+
+        return matchesName && matchesRole
+    })
 }
 
 

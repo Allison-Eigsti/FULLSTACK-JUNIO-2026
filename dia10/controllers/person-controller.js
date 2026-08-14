@@ -2,7 +2,7 @@ const personModel = require('../models/Person')
 
 const getAllPeople = (req, res) => {
     try {
-        const people = personModel.getAllPeople()
+        const people = personModel.getAllPeople(req.query)
 
         res.status(200).json(people)
     } catch(err) {
