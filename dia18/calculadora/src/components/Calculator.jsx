@@ -5,7 +5,7 @@ import Button from './Button'
 
 function Calculator() {
   const [screen, setScreen] = useState('')
-  const [screenHistory, setScreenHistory] = useState('')
+  const [screenHistory, setScreenHistory] = useState([])
 
   function pressButton(n) {
     setScreen(screen + n)
@@ -13,8 +13,15 @@ function Calculator() {
 
   function setResult() {
     let r = evaluate(screen)
+    let newValue = `${screen} = ${r}`
+
     setScreen(r)
-    setScreenHistory(r)
+
+    setScreenHistory(prevHistory => {
+      const newHistory = [...prevHistory, newValue]
+
+      return newHistory.slice(-10)
+    })
   }
 
   function clrAll() {
@@ -34,7 +41,9 @@ function Calculator() {
           <section className="flex flex-col w-96 h-124 p-6 gap-4 rounded-3xl items-center bg-black">
             <h2 className='text-2xl text-white font-bold'>History</h2>
             <div className="flex-1 flex items-end justify-end w-full bg-gray-100 rounded-2xl p-2">
-              <h2 className='text-2xl font-bold'>{screenHistory}</h2>
+              <h2 className='text-2xl font-bold'>{screenHistory.map((item, index) => (
+                <p key={index}>{item}</p>
+              ))}</h2>
             </div>
           </section>
         </div>
