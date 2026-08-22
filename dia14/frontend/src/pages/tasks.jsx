@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function Tasks() {
   const [ tasks, setTasks] = useState([])
 
   //get stored todos
   useEffect(() => {
-    fetch('http://localhost:3000/tasks', {
+    fetch(`${API_URL}/tasks`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -22,7 +24,7 @@ function Tasks() {
     const name = event.target[0].value;
     const description = event.target[1].value;
 
-    fetch('http://localhost:3000/tasks', {
+    fetch(`${API_URL}/tasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -38,7 +40,7 @@ function Tasks() {
 
 function handleDeleteTask(taskId) {
   console.log(222)
-  fetch(`http://localhost:3000/tasks/${taskId}`, {
+  fetch(`${API_URL}/tasks/${taskId}`, {
     method: 'delete',
     headers: {
         'Content-Type': 'application/json',
@@ -50,7 +52,7 @@ function handleDeleteTask(taskId) {
 }
 
 function handleChangeStatus(taskId, newStatus) {
-  fetch(`http://localhost:3000/tasks/${taskId}`, {
+  fetch(`${API_URL}/tasks/${taskId}`, {
     method: 'PUT',
     headers: {
         'Content-Type': 'application/json',
