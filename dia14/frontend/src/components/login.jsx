@@ -1,4 +1,6 @@
 import {useState} from 'react'
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 function Login() {
     const [name, setName] = useState('')
@@ -6,7 +8,7 @@ function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        fetch('http://localhost:3000/user/login', {
+        fetch(`${API_URL}/user/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

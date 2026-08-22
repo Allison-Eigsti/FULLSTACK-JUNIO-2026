@@ -1,27 +1,39 @@
 import {useState} from 'react'
+const API_URL = import.meta.env.VITE_API_URL;
 
-function Login() {
-    const [name, setName] = useState('')
-    const [password, setPassword] = useState('')
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        fetch('http://localhost:3000/user/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ name, password })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.accessToken) {
-                localStorage.setItem('token', data.accessToken)
-                window.location.href = '/tasks'
+    function Login() {
+        const [name, setName] = useState('')
+        const [password, setPassword] = useState('')
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch(`${API_URL}/user/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, password })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Login failed: ${response.status}`);
             }
-        })
-        .catch(error => console.error('Error logging in user:', error))
-    }
+
+            const data = await response.json();
+
+            if (data.accessToken) {
+                localStorage.setItem('token', data.accessToken);
+                window.location.href = '/tasks';
+            }
+
+        } catch (error) {
+            console.error('Error logging in user:', error);
+        }
+    };
+
 
     return (
         <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">

@@ -2,8 +2,6 @@ const { parseCSV, writeCSV } = require('../csv.js')
 const { v4: uuidv4 } = require("uuid");
 
 
-
-
 // get all people
 function getAllPeople(filters = {}) {
     const people = parseCSV('person')
