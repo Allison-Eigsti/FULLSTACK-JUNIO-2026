@@ -8,6 +8,7 @@ import Timer from './components/Timer'
 import Counter2 from './components/Counter2'
 import Alert from './components/Alert'
 import Click from './components/Click'
+import Hover from './components/Hover'
 
 function App() {
   const [color, setColor] = useState('#f7f5bc')
@@ -51,6 +52,7 @@ return (
       </button>
       { key && (<Alert />)}
       <Click />
+      <Hover />
     </main>
   </>
 )

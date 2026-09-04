@@ -5,8 +5,8 @@ function Click() {
 
     return(
         <>
-            <div style = {hidden ? "display:none" : "display:block"}>Clicked!</div>
-            <button onClick={setHidden(!hidden)}>Click for alert</button>
+            <div className = {`${hidden ? "hidden" : "block"}`}>Clicked!</div>
+            <button onClick={() => setHidden(!hidden)}>{hidden ? "Click for alert" : "Click to hide alert"}</button>
         </>
     )
 }
