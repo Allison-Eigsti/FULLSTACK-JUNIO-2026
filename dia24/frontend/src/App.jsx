@@ -6,7 +6,7 @@ function App() {
 
   const styles = {
     container: {
-      textAlight: "center",
+      textAlign: "center",
       padding: "20px",
       backgroundColor: "blue",
     },
