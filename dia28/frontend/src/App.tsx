@@ -40,14 +40,19 @@ const usuarios = [
     {
         nombre: 'Allie',
         edad: 28,
+        activo: true
     },
     {
         nombre: 'Meggie',
         edad: 28,
+        activo: false
+
     },
     {
         nombre: 'Sara',
         edad: 28,
+        activo: true
+
     }
 ]
 
@@ -72,7 +77,6 @@ function App(): JSX.Element {
       </div>
 
       <ListaUsuarios usuarios={usuarios}/>
-
     </>
   )
 }
