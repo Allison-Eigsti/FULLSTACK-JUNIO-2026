@@ -4,20 +4,16 @@ interface UserProps {
     activo: boolean
 }
 
+const UsuarioCard: React.FC<UserProps> = ({ nombre, edad, activo }) => {
 
-const UsuarioCard : React.FC<UserProps> = (user) => {
+    return (
+        <div className={activo ? "text-green-500" : "text-red-500"}>
+            <h2>Info del usuario</h2>
 
-    return(
-        <>
-            <div className={user.activo ? "text-green-500" : "text-red-500"}>
-                <h2>Info del usuario</h2>
-
-                <p>Nombre : {user.nombre}
-                Edad: {user.edad} 
-                </p>
-            </div>
-        </>
+            <p>Nombre: {nombre}</p>
+            <p>Edad: {edad}</p>
+        </div>
     )
-} 
+}
 
 export default UsuarioCard
