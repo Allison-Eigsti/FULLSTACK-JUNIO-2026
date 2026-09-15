@@ -38,6 +38,7 @@ function App() {
       <Tarjeta>I am the children content being passed through</Tarjeta>
       <Contenedor>I am the children being passed into the section</Contenedor>
       <Alerta>Warning message!</Alerta>
+  
     </>
   )
 }
