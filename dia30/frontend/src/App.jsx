@@ -15,6 +15,11 @@ import LoggedIn from './components/LoggedIn'
 function Main() {
   const { theme } = useContext(ThemeContext)
 
+  const productList = [
+    { id: 1, name: 'T-Shirt', price: 25 },
+    { id: 2, name: 'Shoes', price: 60 },
+] ??? 
+
   return (
     <main className={theme === 'light' ? 'h-screen bg-white text-black flex' : 'h-screen bg-gray-900 text-white'}>
       <AuthProvider>
