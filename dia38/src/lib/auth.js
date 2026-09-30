@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -54,6 +52,8 @@ export async function registerUser({ name, password }) {
 
 
 async function loginUser(req) {
+    await connectDB();
+    
     const { name, password } = req.body
 
     try {
@@ -111,4 +111,3 @@ async function loginUser(req) {
       message: "Something went wrong while logging in",
     }}
 }
-
